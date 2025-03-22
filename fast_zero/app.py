@@ -1,3 +1,4 @@
+import os
 from http import HTTPStatus
 
 from fastapi import FastAPI
@@ -24,3 +25,12 @@ def read_root_html():
             <h1> Olá Mundo! </h1>
         </body>
     </html>"""
+
+
+@app.get('/exercicio-html2', response_class=HTMLResponse)
+def read_root_html2():
+    template_path = os.path.join('templates', 'exercicio-aula2.html')
+    with open(template_path, 'r', encoding='utf-8') as file:
+        html_content = file.read()
+
+    return HTMLResponse(content=html_content)
